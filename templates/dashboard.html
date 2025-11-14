@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 fw-bold">Scraped Data</h2>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>URL</th>
+                <th>Domain</th>
+                <th>Scraped At</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in data.items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.title or "N/A" }}</td>
+                <td><a href="{{ item.url }}" target="_blank">Visit</a></td>
+                <td>{{ item.domain }}</td>
+                <td>{{ item.scraped_at.strftime("%Y-%m-%d %H:%M") }}</td>
+
+                <td>
+                    <a href="{{ url_for('scraper.preview', item_id=item.id) }}" class="btn btn-sm btn-info">
+                        Preview
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<nav>
+    <ul class="pagination justify-content-center">
+        {% if data.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('scraper.dashboard', page=data.prev_num) }}">Previous</a>
+            </li>
+        {% endif %}
+
+        <li class="page-item disabled">
+            <span class="page-link">Page {{ data.page }} of {{ data.pages }}</span>
+        </li>
+
+        {% if data.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('scraper.dashboard', page=data.next_num) }}">Next</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

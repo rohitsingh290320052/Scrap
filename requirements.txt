@@ -1,0 +1,13 @@
+flask
+flask_sqlalchemy
+requests
+beautifulsoup4
+Flask-Login
+pandas
+plotly
+reportlab
+python-dotenv
+Flask-WTF
+WTForms
+
+

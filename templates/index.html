@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Scrape a URL{% endblock %}
+
+{% block content %}
+<div class="col-md-6 mx-auto mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-center fw-bold">
+            Scrape a Website
+        </div>
+        <div class="card-body">
+
+            <form method="POST" action="{{ url_for('scraper.scrape') }}">
+                <label class="form-label">Enter URL</label>
+                <input type="text" name="url" class="form-control" placeholder="https://example.com" required>
+
+                <button class="btn btn-primary w-100 mt-3">Scrape</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
